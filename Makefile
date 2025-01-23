@@ -1,11 +1,10 @@
 all:
-	xxd -i site/index.html > html.c
-
-	@cmake -G Ninja -B build -S . -D CMAKE_BUILD_TYPE=Release
-	@cmake --build build
-
-	strip ./build/bin/example
-	./build/bin/example
+	mkdir -p src/build/
+	cd src && xxd -i site/index.html > ./build/html.c
+	cd src && cmake -G Ninja -B build -S . -D CMAKE_BUILD_TYPE=Release
+	cd src && cmake --build build
+	cd src && strip ./build/bin/example
+	cd src && ./build/bin/example
 
 clean:
-	@rm -rf build
+	cd src && rm -rf build
